@@ -1,0 +1,29 @@
+<div class="grid grid-cols-1 md:grid-cols-4 gap-3 mb-4">
+  <div class="rounded-xl border border-slate-200 bg-slate-50 p-3">
+    <div class="text-xs text-slate-500 font-semibold">RTT Avg</div>
+    <div class="mt-1 text-lg font-bold text-slate-800">
+      {{ kpis.rttAvgMs ?? '—' }} <span class="text-sm">ms</span>
+    </div>
+  </div>
+
+  <div class="rounded-xl border border-slate-200 bg-slate-50 p-3">
+    <div class="text-xs text-slate-500 font-semibold">Jitter</div>
+    <div class="mt-1 text-lg font-bold text-slate-800">
+      {{ kpis.jitterMs ?? '—' }} <span class="text-sm">ms</span>
+    </div>
+  </div>
+
+  <div class="rounded-xl border border-slate-200 bg-slate-50 p-3">
+    <div class="text-xs text-slate-500 font-semibold">Packet Loss</div>
+    <div class="mt-1 text-lg font-bold text-slate-800">
+      {{ kpis.packetLossPct ?? '—' }} <span class="text-sm">%</span>
+    </div>
+  </div>
+
+  <div class="rounded-xl border border-slate-200 bg-slate-50 p-3">
+    <div class="text-xs text-slate-500 font-semibold">Throughput</div>
+    <div class="mt-1 text-lg font-bold text-slate-800">
+      {{ kpis.throughputMbps ?? '—' }} <span class="text-sm">Mbps</span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,210 @@
+<div class="bg-white rounded-xl border border-slate-200 shadow-sm">
+  <div class="px-4 py-3 border-b border-slate-200">
+    <div class="font-semibold text-slate-800">Test Configuration</div>
+  </div>
+
+  <div class="p-4 space-y-4">
+    <!-- Segment -->
+    <div>
+      <div class="text-sm font-semibold text-slate-700 mb-2">Test Segment:</div>
+
+      <app-radio-group
+        name="segment"
+        [options]="options.segments"
+        [ngModel]="config.segment"
+        (ngModelChange)="segmentChange.emit($event)"
+        direction="col"
+      ></app-radio-group>
+    </div>
+
+    <!-- Client -->
+    <div class="flex items-center justify-between gap-3">
+      <div class="text-sm font-semibold text-slate-700">Client IP:</div>
+
+      <app-select
+        class="flex-1"
+        [options]="clientIpOptions"
+        [ngModel]="config.client.ip"
+        (ngModelChange)="clientIpChange.emit($event)"
+        selectClass="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm bg-white"
+      ></app-select>
+    </div>
+
+    <!-- AssetPoint -->
+    <div class="space-y-2">
+      <div class="flex items-center gap-2">
+        <div class="text-sm font-semibold text-slate-700 w-28">AssetPoint IP:</div>
+
+        <app-text-input
+          class="flex-1"
+          valueType="string"
+          [ngModel]="config.assetPoint.ip"
+          (ngModelChange)="assetPointIpChange.emit($event)"
+          inputClass="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm"
+        ></app-text-input>
+      </div>
+
+      <div class="flex items-center justify-end gap-2">
+        <app-button
+          (clicked)="discoverAssetPoint.emit()"
+          [btnClass]="
+            'px-3 py-2 rounded-lg bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700'
+          "
+        >
+          Discover
+        </app-button>
+
+        <app-button
+          (clicked)="pingAssetPoint.emit()"
+          [btnClass]="
+            'px-3 py-2 rounded-lg bg-blue-400 text-blue-700 border border-blue-200 text-sm font-semibold hover:bg-blue-500'
+          "
+        >
+          Ping
+        </app-button>
+      </div>
+    </div>
+
+    <!-- Server -->
+    <div class="space-y-2">
+      <div class="flex items-center gap-2">
+        <div class="text-sm font-semibold text-slate-700 w-28">Server IP:</div>
+
+        <app-text-input
+          class="flex-1"
+          valueType="string"
+          [ngModel]="config.server.ip"
+          (ngModelChange)="serverIpChange.emit($event)"
+          inputClass="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm"
+        ></app-text-input>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <div class="text-sm font-semibold text-slate-700 w-28">Port:</div>
+
+        <app-text-input
+          class="flex-1"
+          valueType="number"
+          [ngModel]="config.server.port"
+          (ngModelChange)="serverPortChange.emit($event)"
+          inputClass="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm"
+        ></app-text-input>
+
+        <app-button
+          (clicked)="pingServer.emit()"
+          [btnClass]="
+            'px-3 py-2 rounded-lg bg-blue-50 text-blue-700 border border-blue-200 text-sm font-semibold hover:bg-blue-100'
+          "
+        >
+          Ping
+        </app-button>
+      </div>
+    </div>
+
+    <!-- Packet sizes (SINGLE SELECT) -->
+    <div>
+      <div class="text-sm font-semibold text-slate-700 mb-2">Packet Sizes:</div>
+
+      <app-pill-select
+        [options]="options.packetSizes"
+        [value]="selectedPacketSize"
+        (valueChange)="onPacketSizeSelect($event)"
+        [pillClass]="'px-3 py-1.5 rounded-lg border text-sm font-semibold'"
+        [activeClass]="'bg-emerald-600 border-emerald-600 text-white'"
+        [inactiveClass]="'bg-white border-slate-200 text-slate-700 hover:bg-slate-50'"
+      ></app-pill-select>
+
+      @if (isCustomSelected()) {
+        <div class="mt-2 flex items-center gap-2">
+          <div class="text-sm text-slate-600 w-24">Custom (B):</div>
+
+          <app-text-input
+            class="flex-1"
+            valueType="number"
+            [ngModel]="config.packetSizes.customBytes ?? 0"
+            (ngModelChange)="customBytesChange.emit($event)"
+            inputClass="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm"
+          ></app-text-input>
+        </div>
+      }
+    </div>
+
+    <!-- Count / Interval / Duration -->
+    <div class="grid grid-cols-1 gap-3">
+      <div class="flex items-center justify-between gap-3">
+        <div class="text-sm font-semibold text-slate-700">Count per Size:</div>
+
+        <app-select
+          class="flex-1"
+          [options]="options.countPerSize"
+          [ngModel]="config.countPerSize"
+          (ngModelChange)="countPerSizeChange.emit($event)"
+          selectClass="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm bg-white"
+        ></app-select>
+      </div>
+
+      <div class="flex items-center justify-between gap-3">
+        <div class="text-sm font-semibold text-slate-700">Interval:</div>
+
+        <app-select
+          class="flex-1"
+          [options]="options.intervalMs"
+          [ngModel]="config.intervalMs"
+          (ngModelChange)="intervalMsChange.emit($event)"
+          selectClass="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm bg-white"
+        ></app-select>
+      </div>
+
+      <div class="flex items-center justify-between gap-3">
+        <div class="text-sm font-semibold text-slate-700">Duration:</div>
+
+        <app-select
+          class="flex-1"
+          [options]="options.durationSec"
+          [ngModel]="config.durationSec"
+          (ngModelChange)="durationSecChange.emit($event)"
+          selectClass="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm bg-white"
+        ></app-select>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="pt-2 flex items-center gap-2">
+      <app-button
+        (clicked)="start.emit()"
+        [btnClass]="
+          'flex-1 px-4 py-2 rounded-lg bg-emerald-600 text-white font-bold hover:bg-emerald-700'
+        "
+      >
+        Start Test
+      </app-button>
+
+      <app-button
+        (clicked)="pause.emit()"
+        [btnClass]="
+          'px-4 py-2 rounded-lg bg-slate-100 border border-slate-200 text-slate-800 font-bold hover:bg-slate-200'
+        "
+      >
+        {{ isPaused ? 'Resume' : 'Pause' }}
+      </app-button>
+
+      <app-button
+        (clicked)="stop.emit()"
+        [btnClass]="
+          'px-4 py-2 rounded-lg bg-slate-100 border border-slate-200 text-slate-800 font-bold hover:bg-slate-200'
+        "
+      >
+        Stop
+      </app-button>
+
+      <app-button
+        (clicked)="saveProfile.emit()"
+        [btnClass]="
+          'px-4 py-2 rounded-lg bg-slate-100 border border-slate-200 text-slate-800 font-bold hover:bg-slate-200'
+        "
+      >
+        Save Profile
+      </app-button>
+    </div>
+  </div>
+</div>

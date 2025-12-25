@@ -1,0 +1,38 @@
+<button
+  [attr.type]="type"
+  [disabled]="disabled"
+  [attr.aria-label]="ariaLabel"
+  (click)="onClick($event)"
+  [ngClass]="classes"
+>
+  <!-- Icon LEFT -->
+  @if (iconTpl && iconPosition === 'left') {
+    <ng-container>
+      <span class="inline-flex shrink-0" [ngClass]="iconClass">
+        @if (iconClassFa) {
+          <i [ngClass]="iconClassFa"></i>
+        } @else {
+          <ng-container [ngTemplateOutlet]="iconTpl"></ng-container>
+        }
+      </span>
+    </ng-container>
+  }
+
+  <!-- Label -->
+  <span class="leading-none">
+    <ng-content></ng-content>
+  </span>
+
+  <!-- Icon RIGHT -->
+  @if (iconTpl && iconPosition === 'right') {
+    <ng-container>
+      <span class="inline-flex shrink-0" [ngClass]="iconClass">
+        @if (iconClassFa) {
+          <i [ngClass]="iconClassFa"></i>
+        } @else {
+          <ng-container [ngTemplateOutlet]="iconTpl"></ng-container>
+        }
+      </span>
+    </ng-container>
+  }
+</button>

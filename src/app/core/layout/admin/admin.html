@@ -1,0 +1,26 @@
+<div class="flex h-screen bg-gray-200">
+  <app-sidebar
+    (click)="clickSideBar()"
+    class="transition-all duration-300 hidden lg:block"
+    [ngClass]="{ 'w-1/6': !isCollapsed, 'w-20': isCollapsed }"
+    [isCollapsed]="isCollapsed"
+  ></app-sidebar>
+
+  @if (isMobileMenuOpen) {
+    <div class="fixed inset-0 bg-white z-[9999] lg:hidden flex flex-col">
+      <div class="flex-1 overflow-y-auto">
+        <app-sidebar [isCollapsed]="false" class="w-full" (click)="closeMobileMenu()"></app-sidebar>
+      </div>
+    </div>
+  }
+
+  <div class="flex flex-col flex-1 px-0 lg:px-3 py-3">
+    <app-header class="w-full h-[64px] shrink-0" (toggleMenu)="toggleMenu()"></app-header>
+
+    <main
+      class="mt-6 flex-1 overflow-y-auto bg-white rounded-2xl shadow-xl ml-0 lg:ml-8 mr-0 lg:mr-3 p-6"
+    >
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>

@@ -1,0 +1,5 @@
+# Các thư mục build/cache không cần format
+node_modules
+dist
+coverage
+.angular

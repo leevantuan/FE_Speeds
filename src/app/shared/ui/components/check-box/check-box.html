@@ -1,0 +1,37 @@
+<label class="flex items-start gap-3 select-none" [ngClass]="wrapperClass">
+  <input
+    type="checkbox"
+    class="peer sr-only"
+    [checked]="checked"
+    [disabled]="disabled"
+    (change)="toggle($any($event.target).checked)"
+    (blur)="touch()"
+  />
+
+  <!-- Box -->
+  <span
+    class="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded border transition peer-focus:ring-2 peer-focus:ring-black/20 peer-checked:bg-black peer-checked:border-black peer-disabled:opacity-50 peer-disabled:cursor-not-allowed"
+    [ngClass]="boxClass"
+  >
+    <!-- FontAwesome tick: size đổi bằng Tailwind text-* -->
+    <i
+      class="opacity-0 text-white transition peer-checked:opacity-100"
+      [ngClass]="checkIconClassFa"
+    ></i>
+  </span>
+
+  <!-- Text -->
+  <span class="min-w-0">
+    @if (label) {
+      <span class="block text-sm font-medium" [ngClass]="labelClass">
+        {{ label }}
+      </span>
+    }
+
+    @if (description) {
+      <span class="block text-xs text-black/60" [ngClass]="descClass">
+        {{ description }}
+      </span>
+    }
+  </span>
+</label>

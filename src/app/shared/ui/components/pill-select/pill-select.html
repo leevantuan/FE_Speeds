@@ -1,0 +1,15 @@
+<div class="w-full" [ngClass]="wrapperClass">
+  <div class="flex flex-wrap items-center gap-2" [ngClass]="rowClass">
+    @for (opt of options; track opt.value) {
+      <button
+        type="button"
+        [disabled]="disabled || opt.disabled"
+        (click)="pick(opt)"
+        (blur)="touch()"
+        [class]="pillClasses(isActive(opt))"
+      >
+        {{ opt.label }}
+      </button>
+    }
+  </div>
+</div>

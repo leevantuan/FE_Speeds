@@ -1,0 +1,27 @@
+<div
+  class="flex gap-3"
+  [ngClass]="[direction === 'col' ? 'flex-col' : 'flex-row flex-wrap', wrapperClass]"
+>
+  @for (opt of options; track opt.value) {
+    <label class="inline-flex items-center gap-2 select-none" [ngClass]="itemClass">
+      <input
+        type="radio"
+        class="peer sr-only"
+        [name]="name"
+        [disabled]="disabled || opt.disabled"
+        [checked]="isSelected(opt.value)"
+        (change)="select(opt.value)"
+        (blur)="touch()"
+      />
+
+      <!-- Circle -->
+      <span
+        class="relative inline-flex h-5 w-5 items-center justify-center rounded-full border transition peer-focus:ring-2 peer-focus:ring-black/20 peer-disabled:opacity-50 peer-disabled:cursor-not-allowed [&>span]:opacity-0 peer-checked:[&>span]:opacity-100"
+      >
+        <span class="h-2.5 w-2.5 rounded-full bg-blue-600 transition" [ngClass]="dotClass"></span>
+      </span>
+
+      <span class="text-sm" [ngClass]="labelClass">{{ opt.label }}</span>
+    </label>
+  }
+</div>

@@ -1,0 +1,30 @@
+<div class="bg-white rounded-xl border border-slate-200 shadow-sm">
+  <div class="p-3 border-b border-slate-200 flex items-center justify-between">
+    <div class="font-semibold text-slate-800">Logs</div>
+    <div class="flex items-center gap-2">
+      <button
+        class="px-3 py-1.5 rounded-lg border border-slate-200 bg-slate-50 hover:bg-slate-100 text-sm font-semibold"
+        type="button"
+        (click)="copyLog.emit()"
+      >
+        Copy Log
+      </button>
+      <button
+        class="px-3 py-1.5 rounded-lg border border-slate-200 bg-slate-50 hover:bg-slate-100 text-sm font-semibold"
+        type="button"
+        (click)="exportCsv.emit()"
+      >
+        Export CSV
+      </button>
+    </div>
+  </div>
+
+  <div class="p-3 max-h-40 overflow-auto text-sm">
+    @for (l of logs; track l.time) {
+      <div class="flex gap-3 py-1 border-b border-slate-100 last:border-b-0">
+        <div class="w-20 text-slate-500 font-mono">{{ l.time }}</div>
+        <div class="flex-1" [ngClass]="levelClass(l.level)">{{ l.message }}</div>
+      </div>
+    }
+  </div>
+</div>

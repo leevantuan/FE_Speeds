@@ -1,0 +1,41 @@
+<div class="overflow-x-auto">
+  <table class="w-full text-sm border border-slate-200 rounded-lg overflow-hidden">
+    <thead class="bg-slate-100 text-slate-700">
+      <tr>
+        <th class="text-left p-2 font-semibold">Packet Size</th>
+        <th class="text-right p-2 font-semibold">Sent</th>
+        <th class="text-right p-2 font-semibold">Received</th>
+        <th class="text-right p-2 font-semibold">Loss %</th>
+        <th class="text-right p-2 font-semibold">RTT Avg</th>
+        <th class="text-right p-2 font-semibold">RTT P95</th>
+        <th class="text-right p-2 font-semibold">Jitter</th>
+        <th class="text-left p-2 font-semibold">Throughput (Mbps)</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      @for (r of rows; track r.packetSizeLabel) {
+        <tr class="border-t border-slate-200">
+          <td class="p-2 font-semibold text-slate-800">{{ r.packetSizeLabel }}</td>
+          <td class="p-2 text-right">{{ r.sent }}</td>
+          <td class="p-2 text-right">{{ r.received }}</td>
+          <td class="p-2 text-right">{{ r.lossPct | number: '1.1-1' }}%</td>
+          <td class="p-2 text-right">{{ r.rttAvgMs | number: '1.1-1' }} ms</td>
+          <td class="p-2 text-right">{{ r.rttP95Ms | number: '1.1-1' }} ms</td>
+          <td class="p-2 text-right">{{ r.jitterMs | number: '1.1-1' }} ms</td>
+          <td class="p-2">
+            <div class="flex items-center gap-2">
+              <div class="h-2 flex-1 bg-slate-200 rounded-full overflow-hidden">
+                <div
+                  class="h-full bg-emerald-500"
+                  [style.width.%]="(r.throughputMbps / throughputMax) * 100"
+                ></div>
+              </div>
+              <div class="w-14 text-right font-semibold text-slate-700">{{ r.throughputMbps }}</div>
+            </div>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

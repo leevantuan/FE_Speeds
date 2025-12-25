@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Client laptop">
+  <defs>
+    <linearGradient id="screenGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#eef6ff"/>
+      <stop offset="1" stop-color="#cfe6ff"/>
+    </linearGradient>
+
+    <linearGradient id="blueGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3b82f6"/>
+      <stop offset="1" stop-color="#1d4ed8"/>
+    </linearGradient>
+
+    <linearGradient id="deckGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#334155"/>
+      <stop offset="1" stop-color="#0f172a"/>
+    </linearGradient>
+
+    <linearGradient id="bezelGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#111827"/>
+      <stop offset="1" stop-color="#0b1220"/>
+    </linearGradient>
+  </defs>
+
+  <!-- shadow -->
+  <ellipse cx="256" cy="432" rx="168" ry="22" fill="#000" opacity="0.08"/>
+
+  <!-- SCREEN (more laptop-like) -->
+  <path d="M152 116h208c22 0 40 18 40 40v142c0 10-8 18-18 18H130c-10 0-18-8-18-18V156c0-22 18-40 40-40z"
+        fill="url(#bezelGrad)"/>
+  <path d="M148 134h216c10 0 18 8 18 18v142c0 8-6 14-14 14H144c-8 0-14-6-14-14V152c0-10 8-18 18-18z"
+        fill="#0b1324" opacity="0.55"/>
+  <rect x="140" y="144" width="232" height="152" rx="14" fill="url(#screenGrad)"/>
+  <rect x="140" y="144" width="232" height="152" rx="14" fill="#0ea5e9" opacity="0.06"/>
+
+  <!-- camera -->
+  <circle cx="256" cy="132" r="4" fill="#94a3b8"/>
+
+  <!-- wifi icon on screen -->
+  <circle cx="256" cy="238" r="9" fill="url(#blueGrad)"/>
+  <path d="M220 228c20-20 52-20 72 0" fill="none" stroke="url(#blueGrad)" stroke-width="12" stroke-linecap="round"/>
+  <path d="M200 206c31-31 81-31 112 0" fill="none" stroke="url(#blueGrad)" stroke-width="12" stroke-linecap="round" opacity="0.85"/>
+  <path d="M182 186c41-41 107-41 148 0" fill="none" stroke="url(#blueGrad)" stroke-width="12" stroke-linecap="round" opacity="0.65"/>
+
+  <!-- hinge / chin -->
+  <rect x="168" y="312" width="176" height="16" rx="8" fill="#0f172a"/>
+  <rect x="188" y="316" width="136" height="8" rx="4" fill="#ffffff" opacity="0.08"/>
+
+  <!-- KEYBOARD DECK (perspective) -->
+  <path d="M92 340h328c16 0 30 10 36 24l20 54H56l20-54c6-14 20-24 36-24z"
+        fill="url(#deckGrad)"/>
+
+  <!-- top deck highlight -->
+  <path d="M110 356c26-12 56-18 92-18h108c32 0 60 6 84 18"
+        fill="none" stroke="#fff" stroke-width="10" stroke-linecap="round" opacity="0.06"/>
+
+  <!-- keyboard surface -->
+  <path d="M120 362h272c10 0 18 6 22 14l12 30H78l12-30c4-8 12-14 22-14z"
+        fill="#111827" opacity="0.55"/>
+
+  <!-- keys (simple, readable) -->
+  <g fill="#e5e7eb" opacity="0.22">
+    <!-- row 1 -->
+    <rect x="132" y="374" width="24" height="10" rx="3"/>
+    <rect x="160" y="374" width="24" height="10" rx="3"/>
+    <rect x="188" y="374" width="24" height="10" rx="3"/>
+    <rect x="216" y="374" width="24" height="10" rx="3"/>
+    <rect x="244" y="374" width="24" height="10" rx="3"/>
+    <rect x="272" y="374" width="24" height="10" rx="3"/>
+    <rect x="300" y="374" width="24" height="10" rx="3"/>
+    <rect x="328" y="374" width="24" height="10" rx="3"/>
+
+    <!-- row 2 -->
+    <rect x="140" y="388" width="26" height="10" rx="3"/>
+    <rect x="170" y="388" width="26" height="10" rx="3"/>
+    <rect x="200" y="388" width="26" height="10" rx="3"/>
+    <rect x="230" y="388" width="26" height="10" rx="3"/>
+    <rect x="260" y="388" width="26" height="10" rx="3"/>
+    <rect x="290" y="388" width="26" height="10" rx="3"/>
+    <rect x="320" y="388" width="32" height="10" rx="3"/>
+  </g>
+
+  <!-- trackpad -->
+  <rect x="214" y="404" width="84" height="34" rx="10" fill="#0b1220" opacity="0.7"/>
+  <rect x="224" y="412" width="64" height="18" rx="9" fill="#ffffff" opacity="0.08"/>
+
+  <!-- bottom lip -->
+  <path d="M56 418h400c8 0 14 6 14 14v6c0 12-10 22-22 22H64c-12 0-22-10-22-22v-6c0-8 6-14 14-14z"
+        fill="#0b1220"/>
+  <rect x="210" y="426" width="92" height="8" rx="4" fill="#ffffff" opacity="0.10"/>
+</svg>

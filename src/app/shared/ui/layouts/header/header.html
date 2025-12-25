@@ -1,0 +1,132 @@
+<header
+  class="flex items-center justify-between px-4 py-3 bg-white ml-0 lg:ml-8 mr-0 lg:mr-3 rounded-xl shadow-xl"
+>
+  <div class="flex items-center gap-4">
+    <button
+      (click)="toggleMenuClick()"
+      class="text-gray-500 dark:text-gray-300 text-3xl cursor-pointer hover:text-blue-600 p-2 lg:hidden"
+    >
+      <i class="fas fa-bars text-gray-600 text-xl hover:text-blue-600"></i>
+    </button>
+
+    <button
+      (click)="toggleMenuClick()"
+      class="text-gray-500 dark:text-gray-300 text-3xl cursor-pointer hover:text-blue-600 p-2 hidden lg:flex"
+    >
+      @if (isToggleMenu) {
+        <i class="fas fa-angle-right text-gray-600 text-xl hover:text-blue-600 cursor-pointer"></i>
+      } @else {
+        <i class="fas fa-angle-left text-gray-600 text-xl hover:text-blue-600 cursor-pointer"></i>
+      }
+    </button>
+
+    <div class="relative hidden md:block">
+      <span class="pl-3 pr-16 py-2 w-162 inline-block text-blue-600 font-bold text-2xl">
+        {{
+          lang === 'EN'
+            ? 'We are here to help check your network speed'
+            : 'Chúng tôi ở đây để hỗ trợ kiểm tra tốc độ mạng của bạn'
+        }}
+      </span>
+    </div>
+  </div>
+
+  <div class="flex items-center gap-4">
+    <div class="relative">
+      <button
+        (click)="toggleProfileDropdown()"
+        class="flex items-center gap-2 px-2 py-1 bg-white dark:bg-gray-700 rounded-full shadow border border-gray-300 dark:border-gray-600 hover:shadow-md transition"
+      >
+        <img
+          src="https://i.pinimg.com/736x/0d/64/98/0d64989794b1a4c9d89bff571d3d5842.jpg"
+          alt="Profile"
+          class="w-8 h-8 rounded-full"
+        />
+        <span class="block text-gray-700 dark:text-gray-200 font-medium">
+          {{ userName }}
+        </span>
+        <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M19 9l-7 7-7-7"
+          />
+        </svg>
+      </button>
+
+      @if (isProfileOpen) {
+        <div
+          class="absolute right-0 mt-2 w-40 bg-white dark:bg-gray-700 rounded-lg shadow-lg border border-gray-200 dark:border-gray-600 overflow-hidden z-9999"
+        >
+          <button
+            (click)="logout()"
+            class="flex items-center gap-2 w-full px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600"
+          >
+            <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1m0-10V5"
+              />
+            </svg>
+            {{ lang === 'EN' ? 'Logout' : 'Đăng xuất' }}
+          </button>
+        </div>
+      }
+    </div>
+
+    <div class="relative">
+      <button
+        (click)="toggleLangDropdown()"
+        class="flex items-center gap-2 px-3 py-2 bg-white dark:bg-gray-700 rounded-full shadow border border-gray-300 dark:border-gray-600 hover:shadow-md transition"
+      >
+        <img [src]="selectedLang.flag" class="w-5 h-5" alt="flag" />
+        <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M19 9l-7 7-7-7"
+          />
+        </svg>
+      </button>
+
+      @if (isLangOpen) {
+        <div
+          class="absolute right-0 mt-2 w-40 bg-white dark:bg-gray-700 rounded-lg shadow-lg border border-gray-200 dark:border-gray-600 overflow-hidden z-9999"
+        >
+          @for (lang of languages; track lang.code) {
+            <button
+              (click)="selectLanguage(lang)"
+              class="flex items-center justify-between w-full px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600"
+            >
+              <div class="flex items-center gap-2">
+                <img [src]="lang.flag" alt="language" class="w-8 h-5 object-cover" />
+                <span>{{ lang.name }}</span>
+              </div>
+              @if (selectedLang.code === lang.code) {
+                <ng-container>
+                  <svg
+                    class="w-4 h-4 text-green-500"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="3"
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                </ng-container>
+              }
+            </button>
+          }
+        </div>
+      }
+    </div>
+  </div>
+</header>

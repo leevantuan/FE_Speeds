@@ -1,0 +1,36 @@
+<!-- eslint-disable @angular-eslint/template/label-has-associated-control -->
+<div class="w-full" [ngClass]="wrapperClass">
+  @if (label) {
+    <label class="mb-1 block text-sm font-medium" [ngClass]="labelClass">
+      {{ label }}
+    </label>
+  }
+
+  <select
+    class="w-full rounded-lg border px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-black/20 disabled:opacity-50 disabled:cursor-not-allowed"
+    [ngClass]="selectClass"
+    [disabled]="disabled"
+    [compareWith]="compareWith"
+    [ngModel]="value"
+    (ngModelChange)="setValue($event)"
+    (blur)="touch()"
+  >
+    <option [ngValue]="null" disabled>{{ placeholder }}</option>
+
+    @for (opt of options; track opt.value) {
+      <option [ngValue]="opt.value" [disabled]="opt.disabled">
+        {{ opt.label }}
+      </option>
+    }
+  </select>
+
+  @if (error) {
+    <p class="mt-1 text-xs text-red-600" [ngClass]="errorClass">
+      {{ error }}
+    </p>
+  } @else if (hint) {
+    <p class="mt-1 text-xs text-black/60" [ngClass]="hintClass">
+      {{ hint }}
+    </p>
+  }
+</div>

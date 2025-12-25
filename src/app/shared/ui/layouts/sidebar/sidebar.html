@@ -1,0 +1,32 @@
+<nav
+  class="overflow-hidden w-full h-[calc(100%-24px)] bg-white text-gray-900 flex flex-col transition-all duration-300 px-3 shadow-lg rounded-xl m-3"
+>
+  @if (!isCollapsed) {
+    <div
+      class="mb-3 mt-4 p-4 text-blue-500 text-3xl font-bold border-b border-gray-300 flex items-center justify-center text-shadow"
+    >
+      SPEEDS
+    </div>
+  }
+
+  <ul class="flex-1 overflow-y-auto mt-1">
+    @for (menu of menus; track menu.key) {
+      <li class="group">
+        <button
+          class="cursor-pointer w-full text-left px-4 py-3 flex items-center transition-all duration-300 rounded-lg hover:bg-blue-400 hover:text-white"
+          [class.bg-blue-500]="isMenuActive(menu.key)"
+          [class.text-white]="isMenuActive(menu.key)"
+          [class.shadow-lg]="isMenuActive(menu.key)"
+          (click)="navigateTo(menu)"
+        >
+          <i [ngClass]="menu.icon"></i>
+          @if (!isCollapsed) {
+            <span class="ml-2">{{ menu.label }}</span>
+          }
+        </button>
+      </li>
+    } @empty {
+      <li class="text-center text-gray-500 mt-10">No menu items available.</li>
+    }
+  </ul>
+</nav>

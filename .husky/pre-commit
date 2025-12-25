@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# pre-commit hook:
+# - Chỉ chạy trên các file đã "git add" (staged)
+# - Nhanh + đảm bảo code sạch trước khi commit
+npx lint-staged
