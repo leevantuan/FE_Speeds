@@ -1,49 +1,35 @@
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
-import { MenuResponese } from './model';
-import { MOCK_MENUS } from './mock';
+
+// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
+type MenuItem = {
+  key: string;
+  label: string;
+  icon: string; // emoji cho nhanh, bạn thay bằng fontawesome/lucide tùy
+};
 
 @Component({
   selector: 'app-sidebar',
-  imports: [CommonModule, RouterModule],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './sidebar.html',
   styleUrl: './sidebar.css',
 })
-export class SidebarComponent implements OnInit {
-  @Input() isCollapsed = false;
+export class SidebarComponent {
+  @Input() collapsed = false;
+  @Output() toggleCollapse = new EventEmitter<void>();
 
-  activeMenu = 'home';
-  menus: MenuResponese[] = [];
+  activeKey = 'permissions';
 
-  constructor(private router: Router) {}
+  menus: MenuItem[] = [
+    { key: 'dashboard', label: 'Dashboard', icon: '▦' },
+    { key: 'customers', label: 'Customers', icon: '👥' },
+    { key: 'permissions', label: 'Permissions', icon: '🛡️' },
+    { key: 'reports', label: 'Reports', icon: '📊' },
+    { key: 'settings', label: 'Settings', icon: '⚙️' },
+  ];
 
-  ngOnInit(): void {
-    this.getMenus();
-    this.router.events.subscribe(() => {
-      this.updateActiveMenu(this.router.url);
-    });
-  }
-
-  getMenus() {
-    this.menus = MOCK_MENUS;
-  }
-
-  private updateActiveMenu(currentPath: string) {
-    const matched = this.menus.find((menu) => '/' + menu.path === currentPath);
-    if (matched) {
-      this.activeMenu = matched.key;
-    }
-  }
-
-  navigateTo(menu: MenuResponese) {
-    this.activeMenu = menu.key;
-    if (menu.path) {
-      this.router.navigate(['/' + menu.path]);
-    }
-  }
-
-  isMenuActive(menuKey: string): boolean {
-    return this.activeMenu === menuKey;
+  setActive(k: string) {
+    this.activeKey = k;
   }
 }

@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { AdminComponent } from './core/layout/admin/admin';
 import { HomeComponent } from './pages/home/home';
+import { AdminPermissions } from './pages/admin-permissions/admin-permissions';
 
 export const routes: Routes = [
   {
@@ -12,25 +13,11 @@ export const routes: Routes = [
       { path: 'users', component: AdminComponent },
       { path: 'administrators', component: AdminComponent },
       { path: 'settings', component: AdminComponent },
+      { path: 'permissions', component: AdminPermissions },
     ],
   },
   {
     path: 'admin',
-    // component: AdminLayoutComponent,
-    children: [
-      //   { path: '', component: AdminDashboardComponent },
-      //   { path: 'users', component: AdminUserComponent },
-      //   { path: 'devices', component: AdminDevicesComponent },
-      //   { path: 'departments', component: AdminDepartmentsComponent },
-      //   { path: 'types', component: AdminTypesComponent },
-      //   { path: 'suppliers', component: AdminSuppliersComponent },
-      //   { path: 'scandevices', component: AdminScanDevicesComponent },
-      //   { path: 'liquidate', component: AdminLiquidatesComponent },
-      //   {
-      //     path: 'administrators',
-      //     component: AdminRoleComponent,
-      //     canDeactivate: [PendingChangeGuard],
-      //   },
-    ],
+    children: [],
   },
 ];

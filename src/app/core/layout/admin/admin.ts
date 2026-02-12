@@ -1,50 +1,30 @@
-import { Component, OnInit } from '@angular/core';
-import { HeaderComponent } from '../../../shared/ui/layouts/header/header';
-import { SidebarComponent } from '../../../shared/ui/layouts/sidebar/sidebar';
+import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterModule } from '@angular/router';
-import { SessionStorageService } from '../../http/session-storage/session-storage.service';
+import { SidebarComponent } from '../../../shared/ui/layouts/sidebar/sidebar';
+import { RouterOutlet } from '@angular/router';
+import { AdminHeaderComponent } from '../../../shared/ui/layouts/header/header';
 
 @Component({
   selector: 'app-admin',
-  imports: [HeaderComponent, SidebarComponent, CommonModule, RouterModule],
+  standalone: true,
+  imports: [CommonModule, SidebarComponent, RouterOutlet, AdminHeaderComponent],
   templateUrl: './admin.html',
   styleUrl: './admin.css',
 })
-export class AdminComponent implements OnInit {
-  isCollapsed = false;
-  isMobileMenuOpen = false;
+export class AdminComponent {
+  isCollapsed = signal(false);
+  isMobileMenuOpen = signal(false);
 
-  constructor(
-    private sessionStorage: SessionStorageService,
-    private router: Router,
-  ) {}
-
-  ngOnInit(): void {
-    const checkLogin = this.sessionStorage.getItem('accessToken');
-    if (!checkLogin) {
-      this.router.navigate(['/auth']);
-    }
-  }
-
-  toggleMenu() {
+  toggleSidebar() {
+    // desktop: collapse, mobile: open overlay
     if (window.innerWidth < 1024) {
-      this.isMobileMenuOpen = !this.isMobileMenuOpen;
-      console.log('Menu state:', this.isMobileMenuOpen, 'width:', window.innerWidth);
+      this.isMobileMenuOpen.update((v) => !v);
     } else {
-      this.isCollapsed = !this.isCollapsed;
+      this.isCollapsed.update((v) => !v);
     }
   }
 
   closeMobileMenu() {
-    this.isMobileMenuOpen = false;
-  }
-
-  clickSideBar() {
-    if (window.innerWidth >= 768) {
-      if (this.isCollapsed) this.isCollapsed = false;
-    } else {
-      this.closeMobileMenu();
-    }
+    this.isMobileMenuOpen.set(false);
   }
 }

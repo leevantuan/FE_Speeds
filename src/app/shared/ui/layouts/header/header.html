@@ -1,127 +1,128 @@
 <header
-  class="flex items-center justify-between px-4 py-3 bg-white ml-0 lg:ml-8 mr-0 lg:mr-3 rounded-xl shadow-xl"
+  class="sticky top-0 z-50 flex items-center justify-between gap-3 rounded-2xl border border-primary bg-surface backdrop-blur-xl px-4 py-3 shadow-xl"
 >
-  <div class="flex items-center gap-4">
+  <!-- Left -->
+  <div class="flex items-center gap-3 min-w-0">
     <button
-      (click)="toggleMenuClick()"
-      class="text-gray-500 dark:text-gray-300 text-3xl cursor-pointer hover:text-blue-600 p-2 lg:hidden"
+      class="lg:hidden grid h-11 w-11 place-items-center rounded-xl border border-soft bg-surface hover:bg-surface-2"
+      (click)="openSidebarOnMobile.emit()"
+      aria-label="Open sidebar"
     >
-      <i class="fas fa-bars text-gray-600 text-xl hover:text-blue-600"></i>
+      ☰
     </button>
 
-    <button
-      (click)="toggleMenuClick()"
-      class="text-gray-500 dark:text-gray-300 text-3xl cursor-pointer hover:text-blue-600 p-2 hidden lg:flex"
-    >
-      @if (isToggleMenu) {
-        <i class="fas fa-angle-right text-gray-600 text-xl hover:text-blue-600 cursor-pointer"></i>
-      } @else {
-        <i class="fas fa-angle-left text-gray-600 text-xl hover:text-blue-600 cursor-pointer"></i>
-      }
-    </button>
+    <div class="min-w-0">
+      <div class="text-lg font-semibold text-main leading-tight truncate">Permission Context</div>
+      <div class="text-xs text-subtle truncate">Senior Manager • North America Sales</div>
+    </div>
+  </div>
 
-    <div class="relative hidden md:block">
-      <span class="pl-3 pr-16 py-2 w-162 inline-block text-blue-600 font-bold text-2xl">
-        {{
-          lang === 'EN'
-            ? 'We are here to help check your network speed'
-            : 'Chúng tôi ở đây để hỗ trợ kiểm tra tốc độ mạng của bạn'
-        }}
+  <!-- Middle: search -->
+  <div class="hidden md:flex flex-1 justify-center px-4">
+    <div
+      class="flex w-full max-w-[520px] items-center gap-2 rounded-2xl border border-soft bg-surface px-3 py-2 hover-border-primary focus-within:border-primary"
+    >
+      <span class="text-faint">🔎</span>
+
+      <input
+        class="w-full bg-transparent outline-none text-sm text-main placeholder:text-faint"
+        placeholder="Search modules..."
+      />
+
+      <span class="text-xs rounded-full border border-soft bg-surface-2 px-2 py-0.5 text-faint">
+        ⌘K
       </span>
     </div>
   </div>
 
-  <div class="flex items-center gap-4">
+  <!-- Right -->
+  <div class="flex items-center gap-2">
+    <button
+      class="grid h-11 w-11 place-items-center rounded-xl border border-soft bg-surface hover:bg-surface-2"
+      title="Settings"
+      aria-label="Settings"
+    >
+      ⚙️
+    </button>
+
+    <button
+      class="grid h-11 w-11 place-items-center rounded-xl border border-soft bg-surface hover:bg-surface-2"
+      title="Notifications"
+      aria-label="Notifications"
+    >
+      🔔
+    </button>
+
+    <!-- Profile -->
     <div class="relative">
       <button
+        class="flex h-11 items-center gap-2 rounded-full border border-soft bg-surface px-2 pr-3 hover:bg-surface-2"
         (click)="toggleProfileDropdown()"
-        class="flex items-center gap-2 px-2 py-1 bg-white dark:bg-gray-700 rounded-full shadow border border-gray-300 dark:border-gray-600 hover:shadow-md transition"
       >
         <img
+          class="h-8 w-8 rounded-full border border-soft object-cover"
           src="https://i.pinimg.com/736x/0d/64/98/0d64989794b1a4c9d89bff571d3d5842.jpg"
-          alt="Profile"
-          class="w-8 h-8 rounded-full"
+          alt="profile"
         />
-        <span class="block text-gray-700 dark:text-gray-200 font-medium">
+        <span class="hidden lg:block text-sm font-medium text-main max-w-[140px] truncate">
           {{ userName }}
         </span>
-        <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M19 9l-7 7-7-7"
-          />
-        </svg>
+        <span class="text-faint">▾</span>
       </button>
 
       @if (isProfileOpen) {
         <div
-          class="absolute right-0 mt-2 w-40 bg-white dark:bg-gray-700 rounded-lg shadow-lg border border-gray-200 dark:border-gray-600 overflow-hidden z-9999"
+          class="absolute right-0 mt-2 w-[220px] overflow-hidden rounded-2xl border border-primary bg-surface backdrop-blur-xl shadow-xl"
         >
           <button
-            (click)="logout()"
-            class="flex items-center gap-2 w-full px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600"
+            class="w-full flex items-center gap-2 px-3 py-2 text-sm text-main hover:bg-primary-soft"
           >
-            <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1m0-10V5"
-              />
-            </svg>
-            {{ lang === 'EN' ? 'Logout' : 'Đăng xuất' }}
+            👤 <span>Profile</span>
+          </button>
+
+          <button
+            class="w-full flex items-center gap-2 px-3 py-2 text-sm text-main hover:bg-primary-soft"
+          >
+            🧾 <span>Activity</span>
+          </button>
+
+          <div class="h-px bg-[color:var(--c-border)] my-1"></div>
+
+          <button
+            class="w-full flex items-center gap-2 px-3 py-2 text-sm text-danger hover:bg-primary-soft"
+            (click)="logout()"
+          >
+            ⎋ <span>Logout</span>
           </button>
         </div>
       }
     </div>
 
+    <!-- Language -->
     <div class="relative">
       <button
+        class="flex h-11 items-center gap-2 rounded-full border border-soft bg-surface px-3 hover:bg-surface-2"
         (click)="toggleLangDropdown()"
-        class="flex items-center gap-2 px-3 py-2 bg-white dark:bg-gray-700 rounded-full shadow border border-gray-300 dark:border-gray-600 hover:shadow-md transition"
       >
-        <img [src]="selectedLang.flag" class="w-5 h-5" alt="flag" />
-        <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M19 9l-7 7-7-7"
-          />
-        </svg>
+        <img [src]="selectedLang.flag" class="h-5 w-5 rounded-sm" alt="flag" />
+        <span class="hidden lg:block text-sm text-muted">{{ selectedLang.code }}</span>
+        <span class="text-faint">▾</span>
       </button>
 
       @if (isLangOpen) {
         <div
-          class="absolute right-0 mt-2 w-40 bg-white dark:bg-gray-700 rounded-lg shadow-lg border border-gray-200 dark:border-gray-600 overflow-hidden z-9999"
+          class="absolute right-0 mt-2 w-[220px] overflow-hidden rounded-2xl border border-primary bg-surface backdrop-blur-xl shadow-xl"
         >
           @for (lang of languages; track lang.code) {
             <button
+              class="w-full flex items-center gap-2 px-3 py-2 text-sm text-main hover:bg-primary-soft"
               (click)="selectLanguage(lang)"
-              class="flex items-center justify-between w-full px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600"
             >
-              <div class="flex items-center gap-2">
-                <img [src]="lang.flag" alt="language" class="w-8 h-5 object-cover" />
-                <span>{{ lang.name }}</span>
-              </div>
+              <img [src]="lang.flag" class="h-4 w-6 rounded-sm object-cover" alt="lang" />
+              <span class="flex-1 text-left">{{ lang.name }}</span>
+
               @if (selectedLang.code === lang.code) {
-                <ng-container>
-                  <svg
-                    class="w-4 h-4 text-green-500"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="3"
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
-                </ng-container>
+                <span class="text-success font-bold">✓</span>
               }
             </button>
           }

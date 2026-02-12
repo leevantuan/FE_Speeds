@@ -1,2 +1,221 @@
-/* You can add global styles to this file, and also import other style files */
 @import 'tailwindcss';
+
+/* Base tweaks */
+button {
+  cursor: pointer;
+}
+.apexcharts-canvas {
+  touch-action: none;
+  -ms-touch-action: none;
+}
+
+/* =========================
+   GLOBAL: TYPO + TOKENS (DARK ONLY)
+   ========================= */
+@layer base {
+  :root {
+    /* Primary (sky tone for dark) */
+    --c-primary-solid: #38bdf8; /* sky-400 */
+    --c-primary: rgba(56, 189, 248, 0.78);
+    --c-primary-strong: rgba(56, 189, 248, 0.9);
+    --c-primary-soft: rgba(56, 189, 248, 0.12);
+    --c-primary-soft-2: rgba(56, 189, 248, 0.18);
+
+    /* Surface (dark glass) */
+    --c-surface: rgba(255, 255, 255, 0.05);
+    --c-surface-2: rgba(255, 255, 255, 0.08);
+
+    /* Border */
+    --c-border: rgba(255, 255, 255, 0.1);
+    --c-border-2: rgba(255, 255, 255, 0.14);
+
+    /* Text */
+    --c-text: rgba(255, 255, 255, 0.92);
+    --c-text-muted: rgba(255, 255, 255, 0.72);
+    --c-text-subtle: rgba(255, 255, 255, 0.55);
+    --c-text-faint: rgba(255, 255, 255, 0.4);
+
+    /* Status */
+    --c-success: #34d399;
+    --c-danger: #f87171;
+    --c-warning: #fbbf24;
+
+    /* Table */
+    --c-row-hover: rgba(56, 189, 248, 0.1);
+    --c-row-zebra: rgba(56, 189, 248, 0.06);
+
+    /* Focus */
+    --c-focus: rgba(56, 189, 248, 0.28);
+
+    /* =========================
+       ADMIN BACKGROUND (DARK)
+       chỉnh 1 chỗ là đồng bộ toàn bộ app
+       ========================= */
+    --app-bg: #070812; /* nền đen hơn tí */
+    --admin-vignette: rgba(0, 0, 0, 0.25);
+
+    /* glow tím dưới cùng */
+    --admin-glow-1: radial-gradient(circle, rgba(124, 58, 237, 0.34) 0%, transparent 62%);
+    --admin-glow-2: radial-gradient(circle, rgba(99, 102, 241, 0.22) 0%, transparent 60%);
+
+    /* geometry */
+    --admin-glow1-w: 1300px;
+    --admin-glow1-h: 760px;
+    --admin-glow1-bottom: -360px;
+    --admin-glow1-opacity: 0.55;
+
+    --admin-glow2-w: 980px;
+    --admin-glow2-h: 760px;
+    --admin-glow2-bottom: -420px;
+    --admin-glow2-right: -320px;
+    --admin-glow2-opacity: 0.45;
+  }
+
+  /* Typography scale (compact) */
+  html {
+    font-size: 15px;
+    -webkit-text-size-adjust: 100%;
+  }
+  @media (max-width: 1280px) {
+    html {
+      font-size: 14px;
+    }
+  }
+
+  body {
+    font-size: 1rem;
+    line-height: 1.5;
+    text-rendering: optimizeLegibility;
+    background: var(--app-bg);
+    color: var(--c-text);
+  }
+
+  h1 {
+    font-size: 1.75rem;
+    line-height: 1.2;
+    font-weight: 700;
+  }
+  h2 {
+    font-size: 1.5rem;
+    line-height: 1.25;
+    font-weight: 700;
+  }
+  h3 {
+    font-size: 1.25rem;
+    line-height: 1.3;
+    font-weight: 600;
+  }
+  h4 {
+    font-size: 1.125rem;
+    line-height: 1.35;
+    font-weight: 600;
+  }
+
+  :focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--c-focus);
+    border-radius: 0.5rem;
+  }
+}
+
+@layer utilities {
+  /* Type helpers */
+  .ui-text {
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+  .ui-caption {
+    font-size: 0.75rem;
+    line-height: 1.4;
+  }
+  .app-admin-toolbar {
+    font-size: 0.875rem;
+  }
+
+  /* Background */
+  .bg-surface {
+    background: var(--c-surface);
+  }
+  .bg-surface-2 {
+    background: var(--c-surface-2);
+  }
+  .bg-primary {
+    background: var(--c-primary);
+  }
+  .bg-primary-strong {
+    background: var(--c-primary-strong);
+  }
+  .bg-primary-soft {
+    background: var(--c-primary-soft);
+  }
+  .bg-primary-soft-2 {
+    background: var(--c-primary-soft-2);
+  }
+
+  /* Text */
+  .text-primary {
+    color: var(--c-primary-solid);
+  }
+  .text-main {
+    color: var(--c-text);
+  }
+  .text-muted {
+    color: var(--c-text-muted);
+  }
+  .text-subtle {
+    color: var(--c-text-subtle);
+  }
+  .text-faint {
+    color: var(--c-text-faint);
+  }
+  .text-success {
+    color: var(--c-success);
+  }
+  .text-danger {
+    color: var(--c-danger);
+  }
+  .text-warning {
+    color: var(--c-warning);
+  }
+
+  /* Border */
+  .border-primary {
+    border-color: var(--c-border);
+  }
+  .border-soft {
+    border-color: var(--c-border-2);
+  }
+
+  /* Table */
+  .row-hover {
+    background: var(--c-row-hover);
+  }
+  .row-zebra {
+    background: var(--c-row-zebra);
+  }
+
+  /* Hover shortcuts */
+  .hover-bg-primary-strong:hover {
+    background: var(--c-primary-strong);
+  }
+  .hover-bg-primary-soft:hover {
+    background: var(--c-primary-soft);
+  }
+  .hover-border-primary:hover {
+    border-color: var(--c-border);
+  }
+}
+
+/* reCAPTCHA badge */
+.grecaptcha-badge {
+  visibility: hidden !important;
+}
+body.recaptcha-visible .grecaptcha-badge {
+  visibility: visible !important;
+}
+@media (max-width: 640px) {
+  body.recaptcha-visible .grecaptcha-badge {
+    transform: scale(0.85);
+    transform-origin: bottom right;
+  }
+}

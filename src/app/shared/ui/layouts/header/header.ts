@@ -1,29 +1,20 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { LanguageOption } from './model';
-import { SessionStorageService } from '../../../../core/http/session-storage/session-storage.service';
-import { Router } from '@angular/router';
+
+// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
+type LanguageOption = { code: 'EN' | 'VN'; name: string; flag: string };
 
 @Component({
-  selector: 'app-header',
+  selector: 'app-admin-header',
+  standalone: true,
   imports: [CommonModule],
   templateUrl: './header.html',
   styleUrl: './header.css',
 })
-export class HeaderComponent implements OnInit {
-  @Output() toggleMenu = new EventEmitter<void>();
-  @Output() toggleNotification = new EventEmitter<boolean>();
+export class AdminHeaderComponent implements OnInit {
+  @Output() openSidebarOnMobile = new EventEmitter<void>();
 
-  userName = '';
-  selectedLang: LanguageOption = {
-    code: '',
-    name: '',
-    flag: '',
-  };
-  lang = 'EN';
-
-  isToggleMenu = false;
-  isToggleNotification = false;
+  userName = 'Alex Rivera';
 
   isLangOpen = false;
   isProfileOpen = false;
@@ -33,43 +24,34 @@ export class HeaderComponent implements OnInit {
     { code: 'VN', name: 'Vietnamese', flag: 'https://flagcdn.com/w20/vn.png' },
   ];
 
-  constructor(
-    private sessionStorageService: SessionStorageService,
-    private router: Router,
-  ) {}
+  selectedLang: LanguageOption = this.languages[0];
 
-  ngOnInit() {
-    this.userName = this.sessionStorageService.getItem('userName')?.toString() ?? 'User';
-    const selectCode = this.sessionStorageService.getItem('lang')?.toString() ?? 'EN';
-
-    this.lang = selectCode;
-    this.selectedLang = this.languages.find((x) => x.code == selectCode) ?? this.languages[0];
-  }
-
-  toggleMenuClick() {
-    this.isToggleMenu = !this.isToggleMenu;
-    this.toggleMenu.emit();
+  ngOnInit(): void {
+    // nếu bạn có SessionStorageService thì thay bằng đọc từ session
+    const saved = (localStorage.getItem('lang') as 'EN' | 'VN' | null) ?? 'EN';
+    this.selectedLang = this.languages.find((x) => x.code === saved) ?? this.languages[0];
   }
 
   toggleLangDropdown() {
     this.isLangOpen = !this.isLangOpen;
+    if (this.isLangOpen) this.isProfileOpen = false;
   }
 
   selectLanguage(lang: LanguageOption) {
     this.selectedLang = lang;
+    localStorage.setItem('lang', lang.code);
     this.isLangOpen = false;
-    this.lang = lang.code;
-    this.sessionStorageService.setItem('lang', lang.code);
     location.reload();
   }
 
   toggleProfileDropdown() {
     this.isProfileOpen = !this.isProfileOpen;
+    if (this.isProfileOpen) this.isLangOpen = false;
   }
 
   logout() {
-    // this.authService.logout();
-    this.router.navigate(['/auth']);
+    // bạn thay bằng router navigate auth nếu cần
     this.isProfileOpen = false;
+    alert('Logout');
   }
 }

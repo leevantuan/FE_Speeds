@@ -1,32 +1,86 @@
-<nav
-  class="overflow-hidden w-full h-[calc(100%-24px)] bg-white text-gray-900 flex flex-col transition-all duration-300 px-3 shadow-lg rounded-xl m-3"
+<aside
+  class="fixed left-0 top-0 h-dvh border-r border-primary bg-surface/70 backdrop-blur-xl transition-[width] duration-200"
+  [class.w-[280px]]="!collapsed"
+  [class.w-[88px]]="collapsed"
 >
-  @if (!isCollapsed) {
-    <div
-      class="mb-3 mt-4 p-4 text-blue-500 text-3xl font-bold border-b border-gray-300 flex items-center justify-center text-shadow"
-    >
-      SPEEDS
-    </div>
-  }
+  <div class="flex h-dvh flex-col px-3 py-4">
+    <!-- Brand -->
+    <div class="flex items-center gap-3 px-2">
+      <div
+        class="grid h-10 w-10 place-items-center rounded-xl border border-primary bg-primary-soft"
+      >
+        <span class="text-primary font-bold">🛡️</span>
+      </div>
 
-  <ul class="flex-1 overflow-y-auto mt-1">
-    @for (menu of menus; track menu.key) {
-      <li class="group">
+      @if (!collapsed) {
+        <div class="min-w-0">
+          <div class="font-semibold leading-tight text-main">CRM Admin</div>
+          <div class="text-xs text-subtle">Enterprise v3.2</div>
+        </div>
+      }
+
+      <button
+        class="ml-auto grid h-10 w-10 place-items-center rounded-xl border border-soft bg-surface hover:bg-surface-2"
+        (click)="toggleCollapse.emit()"
+        [attr.aria-label]="collapsed ? 'Expand sidebar' : 'Collapse sidebar'"
+      >
+        @if (collapsed) {
+          <span class="text-muted">›</span>
+        } @else {
+          <span class="text-muted">‹</span>
+        }
+      </button>
+    </div>
+
+    <!-- Menu -->
+    <nav class="mt-6 flex-1">
+      <div class="px-2 pb-2 text-xs tracking-widest text-subtle">MENU</div>
+
+      <ul class="space-y-1">
+        @for (m of menus; track m.key) {
+          <li>
+            <button
+              (click)="setActive(m.key)"
+              class="w-full flex items-center gap-3 rounded-xl px-2.5 py-2 border border-transparent text-muted hover:bg-primary-soft hover:border-primary hover:text-main transition"
+              [class.bg-primary-soft]="activeKey === m.key"
+              [class.border-primary]="activeKey === m.key"
+              [class.text-main]="activeKey === m.key"
+              [class.shadow-lg]="activeKey === m.key"
+            >
+              <span
+                class="grid h-10 w-10 place-items-center rounded-xl border border-soft bg-surface"
+              >
+                {{ m.icon }}
+              </span>
+
+              @if (!collapsed) {
+                <span class="truncate font-medium">{{ m.label }}</span>
+              }
+            </button>
+          </li>
+        }
+      </ul>
+    </nav>
+
+    <!-- Footer user (spacing match content/menu) -->
+    <div class="mt-auto px-2 mb-5">
+      <div class="border-t border-soft pt-4">
         <button
-          class="cursor-pointer w-full text-left px-4 py-3 flex items-center transition-all duration-300 rounded-lg hover:bg-blue-400 hover:text-white"
-          [class.bg-blue-500]="isMenuActive(menu.key)"
-          [class.text-white]="isMenuActive(menu.key)"
-          [class.shadow-lg]="isMenuActive(menu.key)"
-          (click)="navigateTo(menu)"
+          type="button"
+          class="w-full flex items-center gap-3 rounded-2xl border border-soft bg-surface px-2.5 py-3 hover-border-primary hover:bg-primary-soft/20 transition"
         >
-          <i [ngClass]="menu.icon"></i>
-          @if (!isCollapsed) {
-            <span class="ml-2">{{ menu.label }}</span>
+          <div class="h-10 w-10 rounded-full border border-soft bg-surface-2"></div>
+
+          @if (!collapsed) {
+            <div class="min-w-0 text-left">
+              <div class="font-semibold leading-tight text-main">Alex Rivera</div>
+              <div class="text-xs text-subtle">Super Admin</div>
+            </div>
+
+            <span class="ml-auto text-faint">›</span>
           }
         </button>
-      </li>
-    } @empty {
-      <li class="text-center text-gray-500 mt-10">No menu items available.</li>
-    }
-  </ul>
-</nav>
+      </div>
+    </div>
+  </div>
+</aside>

@@ -1,26 +1,51 @@
-<div class="flex h-screen bg-gray-200">
-  <app-sidebar
-    (click)="clickSideBar()"
-    class="transition-all duration-300 hidden lg:block"
-    [ngClass]="{ 'w-1/6': !isCollapsed, 'w-20': isCollapsed }"
-    [isCollapsed]="isCollapsed"
-  ></app-sidebar>
+<!-- admin.html -->
+<div class="min-h-dvh w-full overflow-hidden relative bg-[var(--app-bg)] text-main">
+  <!-- BACKGROUND LAYER -->
+  <div class="pointer-events-none absolute inset-0 -z-0">
+    <div class="absolute inset-0 bg-[var(--admin-vignette)]"></div>
 
-  @if (isMobileMenuOpen) {
-    <div class="fixed inset-0 bg-white z-[9999] lg:hidden flex flex-col">
-      <div class="flex-1 overflow-y-auto">
-        <app-sidebar [isCollapsed]="false" class="w-full" (click)="closeMobileMenu()"></app-sidebar>
+    <div
+      class="absolute left-1/2 -translate-x-1/2 rounded-full blur-3xl bg-[var(--admin-glow-1)] h-[var(--admin-glow1-h)] w-[var(--admin-glow1-w)] bottom-[var(--admin-glow1-bottom)] opacity-[var(--admin-glow1-opacity)]"
+    ></div>
+
+    <div
+      class="absolute rounded-full blur-3xl bg-[var(--admin-glow-2)] h-[var(--admin-glow2-h)] w-[var(--admin-glow2-w)] bottom-[var(--admin-glow2-bottom)] right-[var(--admin-glow2-right)] opacity-[var(--admin-glow2-opacity)]"
+    ></div>
+  </div>
+
+  <!-- CONTENT LAYER -->
+  <div class="relative z-10">
+    <app-sidebar
+      class="hidden lg:block"
+      [collapsed]="isCollapsed()"
+      (toggleCollapse)="toggleSidebar()"
+    ></app-sidebar>
+
+    @if (isMobileMenuOpen()) {
+      <button
+        type="button"
+        aria-label="Close mobile menu"
+        class="fixed inset-0 z-[9999] bg-black/60 lg:hidden"
+        (click)="closeMobileMenu()"
+      ></button>
+
+      <div class="fixed inset-y-0 left-0 z-[10000] w-[280px] lg:hidden">
+        <app-sidebar [collapsed]="false" (toggleCollapse)="closeMobileMenu()"></app-sidebar>
+      </div>
+    }
+
+    <div
+      class="h-dvh overflow-hidden"
+      [class.lg:ml-[280px]]="!isCollapsed()"
+      [class.lg:ml-[88px]]="isCollapsed()"
+    >
+      <div class="h-dvh overflow-y-auto px-4 py-4 lg:px-6 lg:py-6 space-y-5">
+        <app-admin-header (openSidebarOnMobile)="toggleSidebar()"></app-admin-header>
+
+        <main>
+          <router-outlet></router-outlet>
+        </main>
       </div>
     </div>
-  }
-
-  <div class="flex flex-col flex-1 px-0 lg:px-3 py-3">
-    <app-header class="w-full h-[64px] shrink-0" (toggleMenu)="toggleMenu()"></app-header>
-
-    <main
-      class="mt-6 flex-1 overflow-y-auto bg-white rounded-2xl shadow-xl ml-0 lg:ml-8 mr-0 lg:mr-3 p-6"
-    >
-      <router-outlet></router-outlet>
-    </main>
   </div>
 </div>

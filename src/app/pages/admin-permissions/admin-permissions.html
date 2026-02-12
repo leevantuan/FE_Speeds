@@ -1,0 +1,226 @@
+<!-- admin-permissions.html -->
+<div class="grid gap-5 lg:grid-cols-[420px_1fr] lg:items-stretch min-h-[calc(100dvh-140px)]">
+  <!-- Left -->
+  <section
+    class="rounded-3xl border border-primary bg-surface backdrop-blur-xl shadow-xl p-5 h-full"
+  >
+    <div class="text-xs tracking-widest text-subtle">MODULE HIERARCHY</div>
+
+    <div class="mt-4 space-y-2">
+      <button
+        class="w-full flex items-center gap-3 px-3 py-3 rounded-2xl border border-transparent text-muted hover:bg-primary-soft hover-border-primary"
+      >
+        <span class="h-2.5 w-2.5 rounded-full bg-primary-strong"></span>
+        <span class="font-semibold text-main">Dashboard Suite</span>
+      </button>
+
+      <button
+        class="w-full flex items-center gap-3 px-3 py-3 rounded-2xl border border-primary bg-primary-soft text-main"
+      >
+        <span class="h-2.5 w-2.5 rounded-full bg-primary-strong"></span>
+        <span class="font-semibold text-primary">Customer CRM</span>
+      </button>
+
+      <div class="ml-6 mt-1 space-y-2">
+        <button
+          class="w-full flex items-center gap-3 px-3 py-2.5 rounded-2xl border border-soft bg-surface text-muted hover:bg-primary-soft hover-border-primary"
+        >
+          <span class="h-2 w-2 rounded-full bg-[color:var(--c-text-faint)]"></span>
+          <span>Lead Management</span>
+        </button>
+
+        <button
+          class="w-full flex items-center gap-3 px-3 py-2.5 rounded-2xl border border-primary bg-primary-soft-2 text-main"
+        >
+          <span class="h-2 w-2 rounded-full bg-primary-strong"></span>
+          <span class="font-semibold">Account Settings</span>
+        </button>
+
+        <div class="ml-6 space-y-2">
+          <button
+            class="w-full flex items-center gap-3 px-3 py-2.5 rounded-2xl border border-soft bg-surface text-muted hover:bg-primary-soft hover-border-primary"
+          >
+            <span class="h-1.5 w-1.5 rounded-full bg-[color:var(--c-text-faint)]"></span>
+            <span>Billing Details</span>
+          </button>
+
+          <button
+            class="w-full flex items-center gap-3 px-3 py-2.5 rounded-2xl border border-soft bg-surface text-muted hover:bg-primary-soft hover-border-primary"
+          >
+            <span class="h-1.5 w-1.5 rounded-full bg-[color:var(--c-text-faint)]"></span>
+            <span>Security Logs</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Right -->
+  <section
+    class="rounded-3xl border border-primary bg-surface backdrop-blur-xl shadow-xl p-5 h-full flex flex-col"
+  >
+    <!-- Header + Filters -->
+    <div class="flex items-start justify-between gap-4">
+      <div class="min-w-0">
+        <div class="text-2xl font-semibold text-main">Action Configuration</div>
+        <div class="text-sm text-subtle mt-1">
+          Configuring permissions for
+          <span class="text-primary font-semibold">Account Settings</span> node.
+        </div>
+      </div>
+
+      <!-- Filters -->
+      <div class="flex flex-wrap items-center justify-end gap-2">
+        <select
+          class="h-10 rounded-2xl border border-soft bg-surface px-3 text-sm text-main hover-border-primary focus:outline-none"
+        >
+          <option selected>Department</option>
+          <option>North America Sales</option>
+          <option>APAC Sales</option>
+          <option>Finance</option>
+          <option>Operations</option>
+        </select>
+
+        <select
+          class="h-10 rounded-2xl border border-soft bg-surface px-3 text-sm text-main hover-border-primary focus:outline-none"
+        >
+          <option selected>Role</option>
+          <option>Senior Manager</option>
+          <option>Manager</option>
+          <option>Agent</option>
+          <option>Viewer</option>
+        </select>
+
+        <select
+          class="h-10 min-w-[220px] rounded-2xl border border-soft bg-surface px-3 text-sm text-main hover-border-primary focus:outline-none"
+        >
+          <option selected>Choose list…</option>
+          <option>Account Settings</option>
+          <option>Billing Details</option>
+          <option>Security Logs</option>
+          <option>Lead Management</option>
+        </select>
+
+        <div
+          class="h-10 inline-flex items-center rounded-2xl border border-soft bg-surface p-1 text-sm"
+          role="tablist"
+          aria-label="Permission filter"
+        >
+          <button
+            type="button"
+            class="h-8 px-3 rounded-xl text-muted hover:bg-primary-soft hover:text-main transition"
+          >
+            All
+          </button>
+          <button
+            type="button"
+            class="h-8 px-3 rounded-xl bg-primary-soft-2 border border-primary text-main transition"
+          >
+            Access
+          </button>
+          <button
+            type="button"
+            class="h-8 px-3 rounded-xl text-muted hover:bg-primary-soft hover:text-main transition"
+          >
+            Deny
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOP DIVIDER STRIP -->
+    <div
+      class="mt-4 h-px w-full bg-gradient-to-r from-transparent via-[color:var(--c-border-2)] to-transparent"
+    ></div>
+
+    <!-- Body (scroll area) -->
+    <div class="mt-4 flex-1 overflow-auto pr-1">
+      <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+        <div
+          class="rounded-2xl border border-soft bg-surface p-4 hover-border-primary hover:bg-primary-soft/20 transition"
+        >
+          <div class="flex items-center justify-between gap-3">
+            <div class="font-semibold text-main">View Records</div>
+            <button
+              type="button"
+              class="relative inline-flex h-[26px] w-[46px] items-center rounded-full border border-primary bg-primary-strong transition"
+            >
+              <span
+                class="inline-block h-5 w-5 translate-x-[23px] rounded-full bg-white shadow transition"
+              ></span>
+            </button>
+          </div>
+          <div class="mt-2 text-xs text-subtle">Allow user to see account detail pages.</div>
+        </div>
+
+        <div
+          class="rounded-2xl border border-soft bg-surface p-4 hover-border-primary hover:bg-primary-soft/20 transition"
+        >
+          <div class="flex items-center justify-between gap-3">
+            <div class="font-semibold text-main">Create New</div>
+            <button
+              type="button"
+              class="relative inline-flex h-[26px] w-[46px] items-center rounded-full border border-primary bg-primary-strong transition"
+            >
+              <span
+                class="inline-block h-5 w-5 translate-x-[23px] rounded-full bg-white shadow transition"
+              ></span>
+            </button>
+          </div>
+          <div class="mt-2 text-xs text-subtle">Permission to add new account records.</div>
+        </div>
+
+        <div
+          class="rounded-2xl border border-soft bg-surface p-4 hover-border-primary hover:bg-primary-soft/20 transition"
+        >
+          <div class="flex items-center justify-between gap-3">
+            <div class="font-semibold text-main">Edit Details</div>
+            <button
+              type="button"
+              class="relative inline-flex h-[26px] w-[46px] items-center rounded-full border border-soft bg-surface-2 transition"
+            >
+              <span
+                class="inline-block h-5 w-5 translate-x-[3px] rounded-full bg-white shadow transition"
+              ></span>
+            </button>
+          </div>
+          <div class="mt-2 text-xs text-subtle">Modify existing account information.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOTTOM DIVIDER STRIP -->
+    <div
+      class="mt-4 h-px w-full bg-gradient-to-r from-transparent via-[color:var(--c-border-2)] to-transparent"
+    ></div>
+
+    <!-- Footer -->
+    <div class="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <div class="flex flex-wrap items-center gap-3">
+        <!-- Unsaved moved down -->
+        <div
+          class="inline-flex items-center gap-2 rounded-full border border-soft bg-surface px-3 py-2 text-sm"
+        >
+          <span class="text-warning">⟲</span>
+          <span class="text-muted">Unsaved Changes</span>
+        </div>
+
+        <div class="text-sm text-subtle">• Modified 3 items for Senior Manager in NA Sales.</div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <button
+          class="rounded-2xl border border-soft bg-surface px-5 py-3 text-sm text-muted hover:bg-primary-soft hover-border-primary"
+        >
+          Reset Changes
+        </button>
+
+        <button
+          class="rounded-2xl border border-primary bg-primary-strong px-6 py-3 text-sm text-white hover-bg-primary-strong"
+        >
+          Save Permissions
+        </button>
+      </div>
+    </div>
+  </section>
+</div>
